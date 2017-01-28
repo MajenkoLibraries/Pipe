@@ -40,7 +40,7 @@
 class Pipe : public Stream {
     private:
         char *_data;
-        uint32_t _head;
+        volatile uint32_t _head;
         volatile uint32_t _tail;
         uint32_t _size;
         bool _blockingWrite;
