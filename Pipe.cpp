@@ -36,6 +36,7 @@ Pipe::Pipe(uint32_t size, bool blocking) {
     _data = (char *)malloc(size);
     _head = 0;
     _tail = 0;
+    _onWrite = NULL;
 }
 
 int Pipe::peek() {
@@ -63,6 +64,7 @@ size_t Pipe::write(uint8_t d) {
     if (newhead != _tail) {
         _data[_head] = d;
         _head = newhead;
+        if (_onWrite != NULL) _onWrite();
         return 1;
     }
     return 0;
@@ -74,4 +76,8 @@ int Pipe::available() {
 
 void Pipe::flush() {
     _head = _tail = 0;
+}
+
+void Pipe::onWrite(void (*func)()) {
+    _onWrite = func;
 }

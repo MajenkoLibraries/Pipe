@@ -44,6 +44,7 @@ class Pipe : public Stream {
         volatile uint32_t _tail;
         uint32_t _size;
         bool _blockingWrite;
+        void (*_onWrite)();
 
     public:
         Pipe(uint32_t, bool blocking = false);
@@ -52,6 +53,7 @@ class Pipe : public Stream {
         int available();
         int peek();
         void flush();
+        void onWrite(void(*func)());
 };
 
 #endif
