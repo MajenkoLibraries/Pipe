@@ -39,14 +39,17 @@ void setup() {
 }
 
 void loop() {
-    delay(1000);
-    uint32_t start = micros();
-    txBuffer.println("Buffered writing done through your own ISR. There is no reception here though, but you can add that yourself to the ISR.");
-    uint32_t end = micros();
-    uint32_t len = end - start;
-    txBuffer.print("Time taken: ");
-    txBuffer.print(len);
-    txBuffer.println("us");
+    static uint32_t ts = millis();
+    if (millis() - ts >= 1000) {
+        ts = millis();
+        uint32_t start = micros();
+        txBuffer.println("Buffered writing. The interrupt is automatically kicked off through the use of the onWrite() callback.");
+        uint32_t end = micros();
+        uint32_t len = end - start;
+        txBuffer.print("Time taken: ");
+        txBuffer.print(len);
+        txBuffer.println("us");
+    }
 
     while (rxBuffer.available()) {
         txBuffer.write(rxBuffer.read());
