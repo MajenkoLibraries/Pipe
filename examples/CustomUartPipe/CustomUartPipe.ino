@@ -1,7 +1,10 @@
 #include <Pipe.h>
 
-Pipe txBuffer(1024, true);
-Pipe rxBuffer(64);
+uint8_t txBufferStore[1024];
+uint8_t rxBufferStore[64];
+
+Pipe txBuffer(1024, true, txBufferStore);
+Pipe rxBuffer(64, false, rxBufferStore);
 
 volatile bool txRunning = false;
 

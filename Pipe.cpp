@@ -30,10 +30,10 @@
 
 #include <Pipe.h>
 
-Pipe::Pipe(uint32_t size, bool blocking) {
+Pipe::Pipe(uint32_t size, bool blocking, uint8_t *buffer) {
     _blockingWrite = blocking;
     _size = size;
-    _data = (char *)malloc(size);
+    _data = buffer
     _head = 0;
     _tail = 0;
     _onWrite = NULL;

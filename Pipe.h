@@ -47,7 +47,7 @@ class Pipe : public Stream {
         void (*_onWrite)();
 
     public:
-        Pipe(uint32_t, bool blocking = false);
+        Pipe(uint32_t, bool blocking, uint8_t *buffer);
         int read();
         size_t write(uint8_t);
         int available();
