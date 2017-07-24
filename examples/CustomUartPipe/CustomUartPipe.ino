@@ -1,7 +1,7 @@
 #include <Pipe.h>
 
-uint8_t txBufferStore[1024];
-uint8_t rxBufferStore[64];
+char txBufferStore[1024];
+char rxBufferStore[64];
 
 Pipe txBuffer(1024, true, txBufferStore);
 Pipe rxBuffer(64, false, rxBufferStore);

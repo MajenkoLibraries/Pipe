@@ -30,7 +30,7 @@
 
 #include <Pipe.h>
 
-Pipe::Pipe(uint32_t size, bool blocking, uint8_t *buffer) {
+Pipe::Pipe(uint32_t size, bool blocking, char *buffer) {
     _blockingWrite = blocking;
     _size = size;
     _data = buffer;
